@@ -29,7 +29,7 @@ import java.util.Map;
 @Api(tags = "员工相关接口")
 public class EmployeeController {
 
-    @Autowired
+    @Autowired(required=false)//https://blog.csdn.net/Battles2/article/details/127468763
     private EmployeeService employeeService;
     @Autowired
     private JwtProperties jwtProperties;
@@ -104,4 +104,21 @@ public class EmployeeController {
         PageResult pageResult=employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    public Result startOrStop(@PathVariable Integer status,Long id){
+
+        log.info("启用禁用员工账号:{},{}",status,id);
+
+        employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+
 }
