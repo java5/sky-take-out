@@ -77,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee = new Employee();
 
-        //employee.setName(employeeDTO.getName());
+        //employee.setName(employeeDTO.getName());//代码繁琐 所以直接拷贝
 
         //对象属性拷贝
         BeanUtils.copyProperties(employeeDTO, employee);
