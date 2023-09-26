@@ -44,7 +44,7 @@ public class CommonController {
             //截取原始文件名的后缀 dfdfdf.png
             String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
             //构造新文件名
-            String objectName = UUID.randomUUID().toString()+extension;
+            String objectName = UUID.randomUUID().toString() + extension;
 
             //文件请求路径
             String filePath = aliOssUtil.upload(file.getBytes(), objectName);
