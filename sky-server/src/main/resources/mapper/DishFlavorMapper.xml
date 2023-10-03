@@ -9,4 +9,5 @@
             (#{df.dishID},#{df.name},#{df.value})
         </foreach>
     </insert>
+    <update id="inserBatch"></update>
 </mapper>

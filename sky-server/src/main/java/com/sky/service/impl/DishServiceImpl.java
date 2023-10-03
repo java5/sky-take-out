@@ -33,7 +33,7 @@ public class DishServiceImpl implements DishService {
 
         Dish dish = new Dish();
 
-        BeanUtils.copyProperties(dishDTO,dish);
+        BeanUtils.copyProperties(dishDTO,dish);//拷贝数据
 
         //向菜品插入一条数据
         dishMapper.insert(dish);
