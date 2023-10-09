@@ -115,6 +115,78 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.guerlab.smart.region</groupId>
+            <artifactId>smart-region-parent</artifactId>
+            <version>21.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.guerlab.smart.region</groupId>
+            <artifactId>smart-region-parent</artifactId>
+            <version>21.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>region</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.region</groupId>
+            <artifactId>region</artifactId>
+            <version>3.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>aws.sdk.kotlin</groupId>
+            <artifactId>regions</artifactId>
+            <version>0.6.0-alpha</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.region</groupId>
+            <artifactId>org.apache.karaf.region.core</artifactId>
+            <version>3.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.region</groupId>
+            <artifactId>org.apache.karaf.region.persist</artifactId>
+            <version>3.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>aws.sdk.kotlin</groupId>
+            <artifactId>regions-jvm</artifactId>
+            <version>0.6.0-alpha</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>region-align</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.region</groupId>
+            <artifactId>org.apache.karaf.region.command</artifactId>
+            <version>3.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yuanheng100</groupId>
+            <artifactId>china-region</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.meeuw.i18n</groupId>
+            <artifactId>i18n-regions-bom</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ximinghui</groupId>
+            <artifactId>china-region</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.platform</groupId>
+            <artifactId>org.eclipse.equinox.region</artifactId>
+            <version>1.5.300</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -125,5 +197,9 @@
             </plugin>
         </plugins>
     </build>
+
+
+
+
 
 </project>

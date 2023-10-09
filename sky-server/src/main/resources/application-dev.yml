@@ -6,8 +6,16 @@ sky:
     database: sky_take_out
     username: root
     password: 1234
+
+
   alioss:
-    endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5tPeFLzsPPT8gG3LPW64
-    access-key-secret: U6k1brOZ8gaOIXv3nXbulGTUzy6Pd7
-    bucket-name: sky-itcast
+    endpoint: http://s242nibj4.hb-bkt.clouddn.com/
+    access-key-id: Bw9EeOI4-NGRQZWzt-wjxxLKj8aQSfaRMSt87Q5F
+    access-key-secret: ZzxKBDTs5urAnIVAb0hN0c5GciyYo8AZJ-P1lP1u
+    bucket-name: java17514
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 123456
+    database: 10
