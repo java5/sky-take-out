@@ -1,8 +1,8 @@
 package com.sky.controller.admin;
 
-import com.alibaba.druid.sql.dialect.blink.parser.BlinkStatementParser;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
+import com.sky.entity.Dish;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.DishService;
@@ -11,9 +11,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜品管理
@@ -24,7 +26,7 @@ import java.util.List;
 @Slf4j
 public class DishController {
 
-    @Autowired
+    @Autowired//注入
     private DishService dishService;
 
     /**
@@ -37,6 +39,7 @@ public class DishController {
     public Result save(@RequestBody DishDTO dishDTO){
         log.info("新增菜品：{}",dishDTO);
         dishService.saveWithFlavor(dishDTO);
+
         return Result.success();
     }
 
@@ -59,10 +62,9 @@ public class DishController {
      */
     @DeleteMapping
     @ApiOperation("菜品批量删除")
-
-    public Result delete(@RequestParam List<Long> ids){
+    public Result delete(@RequestParam List<Long> ids){//@RequestParam解析字符串,提取id
         log.info("菜品批量删除：{}",ids);
-        dishService.deleBatch(ids);
+        dishService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -81,11 +83,17 @@ public class DishController {
     }
 
 
+    /**
+     * 修改菜品
+     * @param dishDTO
+     * @return
+     */
     @PutMapping
     @ApiOperation("修改菜品")
     public Result update(@RequestBody DishDTO dishDTO){
         log.info("修改菜品：{}",dishDTO);
         dishService.updateWithFlavor(dishDTO);
+
         return Result.success();
     }
 }

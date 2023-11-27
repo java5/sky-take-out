@@ -36,7 +36,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("当前线程的id:"+Thread.currentThread().getId());
+        System.out.println("当前线程的id:"+Thread.currentThread().getId());//获得当前线程id--客户端发起的每次请求都是单独的线程
 
         //判断当前拦截到的是Controller的方法还是其他资源
         if (!(handler instanceof HandlerMethod)) {
@@ -46,15 +46,16 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
 
         //1、从请求头中获取令牌
         String token = request.getHeader(jwtProperties.getAdminTokenName());
+        //请求头中指定参数名称
 
         //2、校验令牌
         try {
             log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getAdminSecretKey(), token);
             Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
-            log.info("当前员工id：", empId);
+            log.info("当前员工id：", empId);//取到员工id,把id传给service的save方法里
 
-            BaseContext.setCurrentId(empId);
+            BaseContext.setCurrentId(empId);//调用ThreadLocal工具类,存储员工empid
 
             //3、通过，放行
             return true;

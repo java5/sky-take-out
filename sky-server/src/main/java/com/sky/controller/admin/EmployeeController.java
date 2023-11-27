@@ -19,14 +19,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//1.接收并封装参数
+//2.调用service方法查询数据库
+//3.封装结果并响应
 /**
  * 员工管理
  */
 @RestController
 @RequestMapping("/admin/employee")
 @Slf4j
-@Api(tags = "员工相关接口")
+@Api(tags = "员工相关接口")//@Api 用在类上,例如Controller,对类的说明
+//tags:标签
 public class EmployeeController {
 
     @Autowired//https://blog.csdn.net/Battles2/article/details/127468763
@@ -36,12 +39,12 @@ public class EmployeeController {
 
     /**
      * 登录
-     *
      * @param employeeLoginDTO
      * @return
      */
     @PostMapping("/login")
-    @ApiOperation(value = "员工登录")
+    @ApiOperation(value = "员工登录") //@ApiOperation 用在方法上,例如controller的方法,说明方法的用途作用
+    //value可以省略不写
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         log.info("员工登录：{}", employeeLoginDTO);
 
@@ -82,11 +85,15 @@ public class EmployeeController {
      * @return
      */
     @PostMapping
-@ApiOperation("新增员工")
-    public Result save(@RequestBody EmployeeDTO employeeDTO){
+    @ApiOperation("新增员工")
+    public Result save(@RequestBody EmployeeDTO employeeDTO){//拿dto来封装
+        //@RequestBody:jison格式转dto接收
         log.info("新增员工:{}",employeeDTO);
+
         System.out.println("当前线程的id:"+Thread.currentThread().getId());
-        employeeService.save(employeeDTO);
+
+        employeeService.save(employeeDTO);//调用save方法,传接收的dto
+        //返回result
         return Result.success();
     }
 
@@ -96,13 +103,15 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/page")
-@ApiOperation("员工分页查询")
+    @ApiOperation("员工分页查询")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
+        //前端传递的不是jison,不用加注解
+        //指定泛型为pageresult
 
         log.info("员工分页查询,参数为:{}",employeePageQueryDTO);
 
         PageResult pageResult=employeeService.pageQuery(employeePageQueryDTO);
-        return Result.success(pageResult);
+        return Result.success(pageResult);//分页查询的结果封装成pageResult对象
     }
 
     /**
@@ -113,6 +122,7 @@ public class EmployeeController {
      */
     @PostMapping("/status/{status}")
     @ApiOperation("启用禁用员工账号")
+    //查询类的操作,要返回data数据,建议写reslt泛型,非查询类不需要 data是空的
     public Result startOrStop(@PathVariable Integer status,Long id){
 
         log.info("启用禁用员工账号：{},{}",status,id);
@@ -128,7 +138,7 @@ public class EmployeeController {
      */
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工信息")
-    public Result<Employee> getById(@PathVariable Long id){
+    public Result<Employee> getById(@PathVariable Long id){//加路径参数注解
         Employee employee = employeeService.getById(id);
         return Result.success(employee);
     }

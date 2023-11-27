@@ -7,12 +7,12 @@ sky:
     username: root
     password: 1234
 
-
+#开发环境下的引用工具类
   alioss:
-    endpoint: http://s242nibj4.hb-bkt.clouddn.com/
-    access-key-id: Bw9EeOI4-NGRQZWzt-wjxxLKj8aQSfaRMSt87Q5F
-    access-key-secret: ZzxKBDTs5urAnIVAb0hN0c5GciyYo8AZJ-P1lP1u
-    bucket-name: java17514
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tA1aEkkJKLtWbszXhEX
+    access-key-secret: Pr4uQG5ZyUpoQudnAsztbTDO427j1B
+    bucket-name: dongliangyu
 
   redis:
     host: localhost

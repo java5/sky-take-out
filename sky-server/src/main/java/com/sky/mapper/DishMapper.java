@@ -6,19 +6,15 @@ import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
-//import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
-//import java.util.List;
-//import java.util.Map;
+import java.util.Map;
 
 @Mapper
 public interface DishMapper {
-
     /**
      * 根据分类id查询菜品数量
      * @param categoryId
@@ -45,7 +41,7 @@ public interface DishMapper {
 
 
     /**
-     * 根据主键查询菜品的sql
+     * 根据主键查询菜品 的sql
      * @param id
      * @return
      */
@@ -53,23 +49,23 @@ public interface DishMapper {
     Dish getById(Long id);
 
 
-
+    /**
+     * 根据主键删除菜品数据
+     * @param id
+     */
     @Delete("delete from dish where id = #{id}")
     void deleteById(Long id);
-
     /**
      * 根据菜品id集合批量删除菜品
      * @param ids
      */
-    void deleteByIds(List<Long> ids);
+//    void deleteByIds(List<Long> ids);
 
 
     /**
-     * 关根据id动态修改菜品数据
+     * 根据id动态修改菜品数据
      * @param dish
      */
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
 }
-
-

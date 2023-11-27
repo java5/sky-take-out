@@ -19,4 +19,6 @@ public class PageResult implements Serializable {
 
     private List records; //当前页数据集合
 
+    //pageresult再封装为result对象,result泛型为pageresult,再转为jison返回给前端
+
 }

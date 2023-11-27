@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+//和前端提交的数据对应上
 @Data
 public class EmployeeDTO implements Serializable {
 

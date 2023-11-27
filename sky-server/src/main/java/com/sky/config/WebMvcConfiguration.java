@@ -42,11 +42,20 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/admin/employee/login");
     }
 
+    //导入knife4j的maven坐标
+    //在配置类中加入knife4j相关配置
+    //设置静态资源映射,否则接口文档页面无法访问
+
+    //@Api 用在类上,例如Controller,对类的说明
+    //@ApiModel 用在类上 例如entity.dto.vo
+    //@ApiModelProperty 用在属性上,描述属性信息
+    //@ApiOperation 用在方法上,例如controller的方法,说明方法的用途作用
+
     /**
      * 通过knife4j生成接口文档
      * @return
      */
-    @Bean
+    @Bean//由spring框架来创建这个对象,并且来管理这个对象
     public Docket docket1() {
         log.info("准别生成接口文档");
         ApiInfo apiInfo = new ApiInfoBuilder()
@@ -60,7 +69,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.admin"))
+                .apis(RequestHandlerSelectors.basePackage("com.sky.controller.admin"))//指定扫描的包,扫描Controller包
+                //解析employeeController文件生成接口文档
                 .paths(PathSelectors.any())
                 .build();
         return docket;
@@ -69,9 +79,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     public Docket docket2() {
         log.info("准别生成接口文档");
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
-                .version("2.0")
-                .description("苍穹外卖项目接口文档")
+                .title("苍穹外卖项目接口文档")//标题
+                .version("2.0")//版本号
+                .description("苍穹外卖项目接口文档")//简介
                 .build();
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
 
@@ -89,6 +99,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * 设置静态资源映射
      * @param registry
      */
+    //3.设置静态资源映射，否则接口文档页面打不开
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         log.info("开始设置静态资源映射");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");

@@ -25,11 +25,16 @@ import org.springframework.util.DigestUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//实现类,实现接口
+
+//调用mapper查询数据库
+//密码比对
+//返回结果
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    private EmployeeMapper employeeMapper;
+    private EmployeeMapper employeeMapper;//注入employeeMapper,后面需要调用
 
     /**
      * 员工登录
@@ -72,6 +77,8 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeeDTO
      */
     public void save(EmployeeDTO employeeDTO) {
+        //调用持久层mapper,把数据插进去
+        //传进来是dto,为了方便封装前端数据,把dto转为employee实体
 
         System.out.println("当前线程的id:"+Thread.currentThread().getId());
 
@@ -80,14 +87,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         //employee.setName(employeeDTO.getName());//代码繁琐 所以直接拷贝
 
         //对象属性拷贝
-        BeanUtils.copyProperties(employeeDTO, employee);
+        BeanUtils.copyProperties(employeeDTO, employee);//dto传递给employee
 
         //设置账号状态,默认正常状态 1表示正常 0表示锁定
-        employee.setStatus(StatusConstant.ENABLE);
+        employee.setStatus(StatusConstant.ENABLE);//定义常量类设置
 
         //设置密码,默认密码123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
 
+        //公共字段赋值
         //设置当前记录的创建时间和修改时间
         //employee.setCreateTime(LocalDateTime.now());
         //employee.setUpdateTime(LocalDateTime.now());
@@ -97,7 +105,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         //employee.setCreateUser(BaseContext.getCurrentId());
         //employee.setUpdateUser(BaseContext.getCurrentId());
 
-        employeeMapper.insert(employee);
+        employeeMapper.insert(employee);//使用mapper调用insert方法插入数据
     }
 
     /**
@@ -107,12 +115,14 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
-        //select * from employee limit 0,10
+        //select * from employee limit 0,10--查询10条数据
         //开始分页查询
+        //mybatis提供了分页查询插件pagehelper
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
 
         Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);//-- 下载mybatisX插件,配置xml,否则报错
 
+        //获得两个值并封装
         long total = page.getTotal();
         List<Employee> records = page.getResult();
 
@@ -125,12 +135,15 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param id
      */
     public void startOrStop(Integer status,Long id){
+        //根据id改值
         //update employee set status = ? where id = ?
 
+        //传统写法
 //        Employee employee = new Employee();
 //        employee.setStatus(status);
 //        employee.setId(id);
 
+        //需要build构建器
         Employee employee = Employee.builder()
                 .status(status)
                 .id(id)
@@ -161,6 +174,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO,employee);//属性拷贝
 
+        //公共字段赋值
         //employee.setUpdateTime(LocalDateTime.now());
         //employee.setUpdateUser(BaseContext.getCurrentId());
 
