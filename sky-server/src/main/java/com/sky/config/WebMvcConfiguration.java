@@ -77,7 +77,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     }
     @Bean
     public Docket docket2() {
-        log.info("准别生成接口文档");
+        log.info("准备生成接口文档");
         ApiInfo apiInfo = new ApiInfoBuilder()
                 .title("苍穹外卖项目接口文档")//标题
                 .version("2.0")//版本号
