@@ -23,10 +23,10 @@ sky:
   wechat:
     appid: wx40fb213ace970891
     secret: 218117cf70edf9f9ca9a41cf53ba4b7f
-    mchid: 1561414331
-    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
-    privateKeyFilePath: D:\pay\apiclient_key.pem
-    apiV3Key: CZBK51236435wxpay435434323FFDuv3
-    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
-    notifyUrl: https://58869fb.r2.cpolar.top/notify/paySuccess
-    refundNotifyUrl: https://58869fb.r2.cpolar.top/notify/refundSuccess
+    mchid: 1561414331 #传智商户号
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606 #证书序列号
+    privateKeyFilePath: D:\pay\apiclient_key.pem #私钥文件
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3 #解密的秘钥-商户平台设置的
+    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem #平台证书
+    notifyUrl: https://58869fb.r2.cpolar.top/notify/paySuccess #支付成功地址
+    refundNotifyUrl: https://58869fb.r2.cpolar.top/notify/refundSuccess #用户退款之后的地址--域名要换成最新的
