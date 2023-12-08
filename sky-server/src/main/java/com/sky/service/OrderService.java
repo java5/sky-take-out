@@ -28,6 +28,7 @@ public interface OrderService {
      */
     void paySuccess(String outTradeNo);
 
+
     /**
      * 用户端订单分页查询
      * @param page
@@ -104,9 +105,9 @@ public interface OrderService {
      */
     void complete(Long id);
 
-    /**
-     * 客户催单
-     * @param id
-     */
-    void reminder(Long id);
+//    /**
+//     * 客户催单
+//     * @param id
+//     */
+//    void reminder(Long id);
 }
