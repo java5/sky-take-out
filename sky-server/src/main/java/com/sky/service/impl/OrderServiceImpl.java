@@ -65,6 +65,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) {
 
+
         //1. 处理各种业务异常（1地址簿为空、2购物车数据为空）
         AddressBook addressBook = addressBookMapper.getById(ordersSubmitDTO.getAddressBookId());//获得addressbook对象
         if(addressBook == null){//根据主键没有这条数据
@@ -77,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
 
         //查询当前用户的购物车数据
         Long userId = BaseContext.getCurrentId();//获取当前用户的id-查的是当前用户的购物车
+
 
         ShoppingCart shoppingCart = new ShoppingCart();//new个对象
         shoppingCart.setUserId(userId);
@@ -91,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         Orders orders = new Orders();
         BeanUtils.copyProperties(ordersSubmitDTO, orders);//对象属性拷贝,没有的自己设置
         orders.setOrderTime(LocalDateTime.now());//设置为当前的系统时间
-        orders.setPayStatus(Orders.UN_PAID);//还没有下单,设置为未支付
+        orders.setPayStatus(Orders.PAID);//还没有下单,设置为0未支付
         orders.setStatus(Orders.PENDING_PAYMENT);//订单状态:1代付款
         orders.setNumber(String.valueOf(System.currentTimeMillis()));//订单号,系统时间的时间戳,number是string类型的,String.valueOf转成string类型的
         orders.setAddress(addressBook.getDetail());
@@ -207,13 +209,17 @@ public class OrderServiceImpl implements OrderService {
         Long userId = BaseContext.getCurrentId();
         User user = userMapper.getById(userId);
 
+        //跳过支付
         //调用微信支付接口，生成预支付交易单
-        JSONObject jsonObject = weChatPayUtil.pay(
-                ordersPaymentDTO.getOrderNumber(), //商户订单号
-                new BigDecimal(0.01), //支付金额，单位 元
-                "苍穹外卖订单", //商品描述
-                user.getOpenid() //微信用户的openid
-        );
+//        JSONObject jsonObject = weChatPayUtil.pay(
+//                ordersPaymentDTO.getOrderNumber(), //商户订单号
+//                new BigDecimal(0.01), //支付金额，单位 元
+//                "苍穹外卖订单", //商品描述
+//                user.getOpenid() //微信用户的openid
+//        );
+
+        //生成空json,跳过微信支付流程
+        JSONObject jsonObject = new JSONObject();
 
         if (jsonObject.getString("code") != null && jsonObject.getString("code").equals("ORDERPAID")) {
             throw new OrderBusinessException("该订单已支付");
@@ -223,7 +229,7 @@ public class OrderServiceImpl implements OrderService {
         vo.setPackageStr(jsonObject.getString("package"));
 
         return vo;
-    }
+        }
 
     /**
      * 支付成功，修改订单状态
