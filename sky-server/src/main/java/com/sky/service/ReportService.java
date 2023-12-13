@@ -46,5 +46,5 @@ public interface ReportService {
      * 导出运营数据报表
      * @param response
      */
-//    void exportBusinessData(HttpServletResponse response);
+    void exportBusinessData(HttpServletResponse response);
 }
