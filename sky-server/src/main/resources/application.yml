@@ -64,6 +64,6 @@ sky:
     notifyUrl: ${sky.wechat.notifyUrl}
     refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
   shop:
-    address: 北京市海淀区上地十街10号
+    address: 唐山市丰润区华北理工
   baidu:
     ak: your-ak

@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * WebSocket服务
+ * WebSocket服务 通过它和客户端通信
  */
-@Component
+@Component//交给spring容器管理
 @ServerEndpoint("/ws/{sid}")
 public class WebSocketServer {
 
@@ -53,7 +53,7 @@ public class WebSocketServer {
     }
 
     /**
-     * 群发
+     * 群发 没有加注解,需要主动调用
      *
      * @param message
      */
