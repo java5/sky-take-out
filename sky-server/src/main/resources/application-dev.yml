@@ -11,7 +11,7 @@ sky:
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
     access-key-id: LTAI5tA1aEkkJKLtWbszXhEX
-    access-key-secret: Pr4uQG5ZyUpoQudnAsztbTDO427j1B
+    access-key-secret: my alioss key
     bucket-name: dongliangyu
 
   redis:
